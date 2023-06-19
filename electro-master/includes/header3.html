@@ -1,5 +1,41 @@
 <html>
 	<body>
+	<script>
+	
+function logout() 
+{
+  var confirmed = confirm("Are you sure you want to logout from your account?");
+  if (confirmed) 
+  {
+    location.href="/electro-master/logout.php";
+  }
+  
+}
+
+function searchPro()
+{
+	var select=document.getElementById("input-select");
+	var selected=select.options[select.selectedIndex];
+	
+	if(selected.value=="1")
+	var cat="Laptop";
+	
+	else if(selected.value=="2")
+	var cat="Accessory";
+	
+	else if(selected.value=="3")
+	var cat="Component";
+	
+	else
+	cat="0";
+
+	var search1=document.getElementById("search");
+	var search2=search1.value;
+	
+	location.href="/electro-master/store.php?query=1&search=" + search2 + "&cat=" + cat;
+}
+		
+	</script>
 				<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -12,7 +48,7 @@
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i>Admin panel</a></li>
-						<li><a href="/electro-master/logout.php"><i class="fa fa-user-o"></i> Logout</a></li>
+						<li><a onclick="logout()"><i class="fa fa-user-o"></i> Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -27,8 +63,8 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
-									<img src="./img/logo.png" alt="">
+								<a href="Index.php" class="logo">
+									<img src="./img/logo.png" width="70" alt="">
 								</a>
 							</div>
 						</div>
@@ -38,13 +74,14 @@
 						<div class="col-md-6">
 							<div class="header-search">
 								<form>
-									<select class="input-select">
+									<select id="input-select" class="input-select">
 										<option value="0">All</option>
 										<option value="1">Laptops</option>
-										<option value="1">Accessories</option>
+										<option value="2">Accessories</option>
+										<option value="3">Components</option>
 									</select>
-									<input class="input" placeholder="Ex:headphone">
-									<button class="search-btn">Search</button>
+									<input id="search" class="input" placeholder="Ex:headphone">
+									<button class="search-btn"  onclick="searchPro()">Search</button>
 								</form>
 							</div>
 						</div>

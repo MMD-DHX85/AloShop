@@ -37,7 +37,11 @@
     </head>
 	<body>
 		<?php include('includes/header.html');
-		$Pro=0;?>
+		$Pro=0;
+		
+		
+		
+		?>
 		
 		<script>
 			function proCode()
@@ -223,7 +227,18 @@
 									
 								$conn=new PDO("mysql:host=localhost;dbname=Online_Shop","root","");
 								$err=$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-								$stmt = $conn->prepare("SELECT * FROM products;");
+								if(isset($_GET['query']))
+								{
+									$cat=$_GET['cat'];
+									$search=$_GET['search'];
+								
+									if(cat==="0" && !isset($_GET['search']))
+									{
+										$stmt = $conn->prepare("SELECT * FROM products;");
+									}
+								}
+								
+								
 								$stmt->execute();
 								if ($stmt->rowCount() > 0) 
 								{

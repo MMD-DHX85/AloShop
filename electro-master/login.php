@@ -21,16 +21,6 @@
 		<meta charset="uft-8">
 	</head>
 	<body>
-	<?php
-	if(isset($_SESSION['login'])&&$_SESSION['login']==true) 
-	{
-		header("location:Index.php");
-		exit();
-	}
-	else
-	include('includes/header.html');
-	
-	?>
 				<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -63,6 +53,6 @@
 					</div>
 				
 					
-					<?php include("includes/footer.html"); ?>
+					
 	</body>
 </html>

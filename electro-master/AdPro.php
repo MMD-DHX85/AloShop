@@ -59,15 +59,15 @@
 						<!-- Billing Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">login</h3></div>
+								<h3 class="title">New Product</h3></div>
 								
 									
 		
-										<form action="action_Login.php" method="POST">
-											<label for="username">Username</label>
-											<input class="input" type="text" id="username" name="username" required>
-											<label for="password">Password</label>
-											<input class="input" type="password" id="password" name="password" required>
+										<form action="action_NewPro.php" method="POST">
+											<label for="ProName">Product Name</label>
+											<input class="input" type="text" id="ProName" name="ProName" required>
+											<label for="ProBrand">Password</label>
+											<input class="input" type="text" id="ProBrand" name="ProBrand" required>
 											<button class="primary-btn order-submit">Login</button></br></br>
 											<label>Don't you have an acount?<a href="sign up.php" style="color:#0077cc;">Sign up</a></label>
 										</form>

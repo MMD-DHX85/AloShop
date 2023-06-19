@@ -1,11 +1,32 @@
-<html>
+<html lang="eng" dir="ltr">
 	<body>
 	
 	<script>
-		function search()
-		{
-			window.alert(hi);
-		}
+
+
+function searchPro()
+{
+	var select=document.getElementById("input-select");
+	var selected=select.options[select.selectedIndex];
+	
+	if(selected.value=="1")
+	var cat="Laptop";
+	
+	else if(selected.value=="2")
+	var cat="Accessory";
+	
+	else if(selected.value=="3")
+	var cat="Component";
+	
+	else
+	cat="0";
+
+	var search1=document.getElementById("search");
+	var search2=search1.value;
+	
+	location.href="/electro-master/store.php?query=1&search=" + search2 + "&cat=" + cat;
+}
+		
 	</script>
 				<!-- HEADER -->
 		<header>
@@ -35,7 +56,7 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="/electro-master/Index.php" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="./img/logo.png" height="70" alt="">
 								</a>
 							</div>
 						</div>
@@ -52,7 +73,7 @@
 										<option value="3">Component</option>
 									</select>
 									<input id="search" class="input" placeholder="Ex:headphone">
-									<button class="search-btn" onclick="search()">Search</button>
+									<button class="search-btn" onclick="searchPro()">Search</button>
 								</form>
 							</div>
 						</div>
