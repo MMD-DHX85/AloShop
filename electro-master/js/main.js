@@ -127,13 +127,19 @@
 
 	var priceInputMax = document.getElementById('price-max'),
 			priceInputMin = document.getElementById('price-min');
+			
 
-	priceInputMax.addEventListener('change', function(){
-		updatePriceSlider($(this).parent() , this.value)
+	$("#price-max").change(function(){
+		updatePriceSlider($(this).parent() , $(this).val())
 	});
 
-	priceInputMin.addEventListener('change', function(){
-		updatePriceSlider($(this).parent() , this.value)
+	// priceInputMax.addEventListener('change', function(){
+	// 	updatePriceSlider($(this).parent() , this.value)
+	// });
+
+
+	$("#price-min").change(function(){
+		updatePriceSlider($(this).parent() , $(this).val())
 	});
 
 	function updatePriceSlider(elem , value) {
