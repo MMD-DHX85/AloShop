@@ -45,7 +45,7 @@
 		else if(isset($_SESSION['admin']) && $_SESSION['admin']===true)
 		include('includes/header3.html');
 		
-		else if ()
+		else
 		include('includes/header.html');
 		
 		

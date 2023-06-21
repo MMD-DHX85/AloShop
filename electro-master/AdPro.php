@@ -59,22 +59,44 @@
 						<!-- Billing Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">New Product</h3></div>
-								
-									
-		
-										<form action="action_NewPro.php" method="POST">
-											<label for="ProName">Product Name</label>
-											<input class="input" type="text" id="ProName" name="ProName" required>
-											<label for="ProBrand">Password</label>
-											<input class="input" type="text" id="ProBrand" name="ProBrand" required>
-											<button class="primary-btn order-submit">Login</button></br></br>
-											<label>Don't you have an acount?<a href="sign up.php" style="color:#0077cc;">Sign up</a></label>
+								<h3 class="title">New Product</h3>
+									</div>
+											<form action="action_NewPro.php" method="POST">
+												<div class="asideput"><label for="ProCode">Product Code</label>
+												<input placeholder="1000" class="input" type="text" id="ProCode" name="ProCode" required>
+												<label for="ProName">Product Name</label>
+												<input placeholder="ProArt" class="input" type="text" id="ProName" name="ProName" required></div>
+												<label for="ProBrand">Product Brand</label>
+												<input placeholder="Asus" class="input" type="text" id="ProBrand" name="ProBrand" required>
+												<label for="ProCat">Product Category</label>
+												<input placeholder="Laptop" class="input" type="text" id="ProCat" name="ProCat" required>
+												<label for="ProPrice">Product Price</label>
+												<input placeholder="$1999" class="input" type="text" id="ProPrice" name="ProPrice" required>
+												<label for="ProPrice">Product Inventory</label>
+												<input placeholder="2(Qty)" class="input" type="text" id="ProQty" name="ProQty" required>
+												<label for="ProIntro">Product Introduction</label>
+												<div class="order-notes">
+													<textarea name="ProIntro" class="input" placeholder="Ex: ASUS Laptop best for programmers"></textarea>
+												</div>
+												<label for="ProDetail">Product Details</label>
+												<div class="order-notes">
+													<textarea name="ProDetail" class="input" placeholder="Ex: CPU Intel i5 13th Gen"></textarea>
+												</div>
+												<label for="ProDesc">Product Description</label>
+												<div class="order-notes">
+													<textarea name="ProDesc" class="input" placeholder="Ex: Windows 11 with best quality and performance"></textarea>
+												</div>
+												
+												<label for="ProPic">Product Picture</label>
+												<input type="file" name="ProPic">
+
+												<button class="primary-btn order-submit">Product Register</button></br></br>
+												
 										</form>
-										</div>
 									</div>
 								</div>
 							</div>
+						</div>
 			</div>
 			<!-- /container -->
 		</div>

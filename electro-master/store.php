@@ -224,22 +224,48 @@
 						<div class="row">
 							<!-- product -->
 							<?php
-									
+								$stmt="";
 								$conn=new PDO("mysql:host=localhost;dbname=Online_Shop","root","");
 								$err=$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-								if(isset($_GET['query']))
+								if(isset($_GET['category']))
 								{
-									$cat=$_GET['cat'];
-									$search=$_GET['search'];
-								
-									if(cat==="0" && !isset($_GET['search']))
+									$cat=$_GET['category'];
+									$key=$_GET['keyword'];
+									
+									if($cat==="0")
 									{
-										$stmt = $conn->prepare("SELECT * FROM products;");
+										$stmt = $conn->prepare("SELECT * FROM products WHERE Pro_Desc LIKE '$key' OR Pro_Brand LIKE '$key' OR Pro_Intro LIKE '$key' OR Pro_Cat LIKE '$key' OR Pro_Detail  LIKE '$key' OR Pro_Code  LIKE '$key';"); 
+										$stmt->execute();
+									}
+
+									else if($cat==="1")
+									{
+										$catN="Laptop";
+										$stmt = $conn->prepare("SELECT * FROM products WHERE Pro_Desc LIKE '$key' OR Pro_Brand LIKE '$key' OR Pro_Intro LIKE '$key' OR Pro_Detail  LIKE '$key' OR Pro_Code  LIKE '$key' AND Pro_Cat='$catN';"); 
+										$stmt->execute();
+									}
+
+									else if($cat==="2")
+									{
+										$catN="Accessory";
+										$stmt = $conn->prepare("SELECT * FROM products WHERE Pro_Desc LIKE '$key' OR Pro_Brand LIKE '$key' OR Pro_Intro LIKE '$key' OR Pro_Detail  LIKE '$key' OR Pro_Code  LIKE '$key' AND Pro_Cat='$catN';"); 
+										$stmt->execute();
+									}
+
+									else if($cat==="3")
+									{
+										$catN="Component";
+										$stmt = $conn->prepare("SELECT * FROM products WHERE Pro_Desc LIKE '$key' OR Pro_Brand LIKE '$key' OR Pro_Intro LIKE '$key' OR Pro_Detail  LIKE '$key' OR Pro_Code  LIKE '$key' AND Pro_Cat='$catN';"); 
+										$stmt->execute();
 									}
 								}
 								
+								else
+								{
+									$stmt=$conn->prepare("SELECT * FROM products;");
+									$stmt->execute();
+								}
 								
-								$stmt->execute();
 								if ($stmt->rowCount() > 0) 
 								{
 										for ($i=0; $i<=20 && $row = $stmt->fetch(PDO::FETCH_ASSOC); $i++)
@@ -297,7 +323,7 @@
 					<!-- /STORE 
 					
 				</div>
-				<!-- /row -->
+				<!-/row -->
 			</div>
 			<!-- /container -->
 		</div>

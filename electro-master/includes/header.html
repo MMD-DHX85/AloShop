@@ -1,33 +1,6 @@
 <html lang="eng" dir="ltr">
 	<body>
 	
-	<script>
-
-
-/*function searchPro() {
-  
-  var select = document.getElementById("selectInput");
-  var selected = select.options[select.selectedIndex];
-  var cat;
-
-alert(select.options[select.selectedIndex]);
-  
-  if (selected.value === "1") {
-    cat = "Laptop";
-  } else if (selected.value === "2") {
-    cat = "Accessory";
-  } else if (selected.value === "3") {
-    cat = "Component";
-  } else {
-    cat = "0";
-  }
-
-  var search1 = document.getElementById("search");
-  var search2 = search1.value;
-
-  window.location.href = "/electro-master/store.php?query=1";
-}*/		
-	</script>
 				<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -65,45 +38,19 @@ alert(select.options[select.selectedIndex]);
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-seach">
-								<form id="select-form">
-									<select id="selectInput" class="input-select">
+								<form action="store.php" id="select-form">
+									<select id="selectInput" name="category" class="input-select">
 										<option value="0">All</option>
 										<option value="1">Laptops</option>
 										<option value="2">Accessories</option>
 										<option value="3">Component</option>
 									</select>
-									<input id="search" class="input" placeholder="Ex:headphone">
-									<button class="search-btn" onclick="searchPro()">Search</button>
+									<input id="search" class="input" name="keyword" placeholder="Ex:headphone">
+									<button class="search-btn" name="search">Search</button>
 								</form>
 							</div>
 						</div>
 						<!-- /SEARCH BAR -->
-									
-							<script>
-							function searchPro() 
-							{
-							/*var select = document.getElementById("selectInput");
-							var selectedIndex = select.selectedIndex;
-							var selectedValue = select.options[selectedIndex].value;
-							var cat;
-
-							if (selectedValue === "1") {
-								cat = "Laptop";
-							} else if (selectedValue === "2") {
-								cat = "Accessory";
-							} else if (selectedValue === "3") {
-								cat = "Component";
-							} else {
-								cat = "0";
-							}
-							var search1 = document.getElementById("search");
-  							var search2 = search1.value;
-*/
-  							location.replace("/electro-master/store.php");
-								  
-							
-						}
-							</script>
 
 					</div>
 					<!-- row -->
