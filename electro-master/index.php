@@ -85,6 +85,8 @@
 		}
 		$cart=0;
 		$pro="";
+		
+		$conn=new PDO("mysql:host=localhost;dbname=Online_Shop","root","");
 		?>
 
 		
@@ -395,7 +397,13 @@
 						</div>
 					</div>
 					<!-- /section title -->
-
+					<?php 
+					$stmtOff=$conn->prepare("SELECT * FROM `products` WHERE Off>5;");
+					$stmtOff->execute();
+				
+					
+					?>
+					
 					<!-- Products tab & slick -->
 					<div class="col-md-12">
 						<div class="row">
@@ -404,157 +412,37 @@
 								<div id="tab2" class="tab-pane fade in active">
 									<div class="products-slick" data-nav="#slick-nav-2">
 										<!-- product -->
+										<?php while($rowOff=$stmtOff->fetch())
+										{ 
+											$stmtimg=$conn->prepare("SELECT * FROM `image` WHERE Pro_Code=?;");
+											$stmtimg->bindParam(1, $rowOff['Pro_Code']);
+											$stmtimg->execute();
+											$rowimg=$stmtimg->fetch(); ?>
 										<div class="product">
 											<div class="product-img">
-												<img src="./img/product06.png" alt="">
+												<img src="<?php echo $rowimg['Path']; ?>" alt="">
 												<div class="product-label">
-													<span class="sale">-30%</span>
+													<span class="sale"><?php echo("-" . $rowOff['Off'] . "%"); ?></span>
 													<span class="new">NEW</span>
 												</div>
 											</div>
+											<?php
+											 $Off=($rowOff['Pro_Price']/100)*$rowOff['Off'];
+											 $price=$rowOff['Pro_Price']-$Off; ?>
 											<div class="product-body">
-												<p class="product-category">لپ تاپ</p>
-												<h3 class="product-name"><a href="#">لپ تاپ Asus</a></h3>
-												<h4 class="product-price">21.000.000 <del class="product-old-price">30.000.000 </del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
+												<p class="product-category"><?php echo($rowOff['Pro_Cat']); ?></p>
+												<h4 class="product-name"><?php echo($rowOff['Pro_Brand']); ?></h4>
+												<h3 class="product-name"><a href="Product.php?pro=<?php echo($rowOff['Pro_Code']); ?>"><?php echo($rowOff['Pro_Name']); ?></a></h3>
+												<h4 class="product-price"><?php echo($rowOff['Pro_Price']); ?> <del class="product-old-price"><?php echo($price); ?></del></h4>
 												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">افزودن به لیست مورد علاقه</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">نمایش محصول</span></button>
+													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Add to wishlist</span></button>
+													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">View Product</span></button>
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید</button>
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 											</div>
-										</div>
-										<!-- /product -->
-
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product06.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">لپ تاپ</p>
-												<h3 class="product-name"><a href="#">لپ تاپ Asus</a></h3>
-												<h4 class="product-price">21.000.000 <del class="product-old-price">30.000.000 </del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">افزودن به لیست مورد علاقه</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">نمایش محصول</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید</button>
-											</div>
-										</div>
-										<!-- /product -->
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product06.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">لپ تاپ</p>
-												<h3 class="product-name"><a href="#">لپ تاپ Asus</a></h3>
-												<h4 class="product-price">21.000.000 <del class="product-old-price">30.000.000 </del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">افزودن به لیست مورد علاقه</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">نمایش محصول</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید</button>
-											</div>
-										</div>
-										<!-- /product -->
-										
-										<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product06.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">لپ تاپ</p>
-												<h3 class="product-name"><a href="#">لپ تاپ Asus</a></h3>
-												<h4 class="product-price">21.000.000 <del class="product-old-price">30.000.000 </del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">افزودن به لیست مورد علاقه</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">نمایش محصول</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید</button>
-											</div>
-										</div>
-										<!-- /product -->
-
-									<!-- product -->
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/product06.png" alt="">
-												<div class="product-label">
-													<span class="sale">-30%</span>
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">لپ تاپ</p>
-												<h3 class="product-name"><a href="#">لپ تاپ Asus</a></h3>
-												<h4 class="product-price">21.000.000 <del class="product-old-price">30.000.000 </del></h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">افزودن به لیست مورد علاقه</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">نمایش محصول</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید</button>
-											</div>
-										</div>
+										</div><?php } ?>
 										<!-- /product -->
 									</div>
 									<div id="slick-nav-2" class="products-slick-nav"></div>
