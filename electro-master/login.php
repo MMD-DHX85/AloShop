@@ -16,9 +16,8 @@
 		<link rel="stylesheet" href="css/font-awesome.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="css/cart.css"/>
 		
-		<meta charset="uft-8">
 	</head>
 	<body>
 				<!-- SECTION -->
