@@ -1,4 +1,22 @@
-<?php session_start();?>
+<?php session_start();
+
+	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id']))
+	{
+		$_SESSION['cart'] = array(); // initialize the cart
+	
+		$product_id = $_POST['product_id'];
+		if (!in_array($product_id, $_SESSION['cart']))
+		{
+		$_SESSION['cart'][] = $product_id; // add the product to the cart
+		}
+
+		$_SESSION['cart_count'] = count($_SESSION['cart']); // update the cart count
+		echo "<script> alert('success'); </script>";
+		exit(); // stop execution after adding to the cart
+	}
+
+
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,7 +25,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<title>Electro-Master Shop</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -31,8 +49,8 @@
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		  < src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></>
 		<![endif]-->
 
     </head>
@@ -40,7 +58,7 @@
 		<?php
 		
 		if(isset($_SESSION['login']) && $_SESSION['login']===true)
-		 include('includes/header2.html');
+		 include('includes/header2.php');
 		 
 		else if(isset($_SESSION['admin']) && $_SESSION['admin']===true)
 		include('includes/header3.html');
@@ -54,32 +72,32 @@
 			if($_GET['message']=="Signup_success")
 			{
 				echo "<script>
-						alert('{$_SESSION['FName']}'+' عزیز به سایت ما خوش اومدی ');
+						alert('{$_SESSION['FName']}'+' welcome to our website ');
 						</script>";
 			}
 			else if($_GET['message']=="login_success")
 			{
 				echo "<script>
-						alert('{$_SESSION['FName']}'+' به حسابت خوش اومدی ');
+						alert('{$_SESSION['FName']}'+' Welcome to your account ');
 						</script>";
 			}
 			else if($_GET['message']=="login_failed")
 			{
 				echo "<script>
-						alert('ورود با مشکل مواجه شد');
+						alert('Login Failed');
 						</script>";
 			}
 			else if($_GET['message']=="Signup_failed")
 			{
 				echo "<script>
-						alert('ثبت نام با مشکل مواجه شد ');
+						alert('Sign up Failed');
 						</script>";
 			}
 			
 			else if($_GET['message']=="login_error")
 			{
 				echo "<script>
-						alert('خطا در اتصال با پایگاه داده ');
+						alert('Database Error');
 						</script>";
 			}
 		}
@@ -88,6 +106,25 @@
 		
 		$conn=new PDO("mysql:host=localhost;dbname=Online_Shop","root","");
 		?>
+		
+
+		<script>
+			document.getElementById("addToCartBtn").addEventListener("click", function(event) {
+			event.preventDefault(); // prevent the form from submitting
+			var form = document.getElementById("addToCartForm");
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "<?php echo $_SERVER['PHP_SELF']; ?>", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.onreadystatechange = function() 
+			{
+				if (xhr.readyState === 4 && xhr.status === 200) 
+				{
+					console.log(xhr.responseText);
+				}
+			};
+			xhr.send(new FormData(form));
+		});
+  </script>
 
 		
 		<!-- SECTION -->
@@ -423,7 +460,6 @@
 												<img src="<?php echo $rowimg['Path']; ?>" alt="">
 												<div class="product-label">
 													<span class="sale"><?php echo("-" . $rowOff['Off'] . "%"); ?></span>
-													<span class="new">NEW</span>
 												</div>
 											</div>
 											<?php
@@ -436,11 +472,16 @@
 												<h4 class="product-price"><?php echo($rowOff['Pro_Price']); ?> <del class="product-old-price"><?php echo($price); ?></del></h4>
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Add to wishlist</span></button>
+													
 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">View Product</span></button>
+													
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												<form id="addToCartForm">
+													<button id="addToCartBtn" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+													<input type="number" name="product_id" hidden value="<?php echo($rowOff['Pro_Code']); ?>">
+												</form>
 											</div>
 										</div><?php } ?>
 										<!-- /product -->
