@@ -12,28 +12,7 @@ function logout()
   
 }
 
-function searchPro()
-{
-	var select=document.getElementById("input-select");
-	var selected=select.options[select.selectedIndex];
-	
-	if(selected.value=="1")
-	var cat="Laptop";
-	
-	else if(selected.value=="2")
-	var cat="Accessory";
-	
-	else if(selected.value=="3")
-	var cat="Component";
-	
-	else
-	cat="0";
 
-	var search1=document.getElementById("search");
-	var search2=search1.value;
-	
-	location.href="/electro-master/store.php?query=1&search=" + search2 + "&cat=" + cat;
-}
 		
 	</script>
 				<!-- HEADER -->

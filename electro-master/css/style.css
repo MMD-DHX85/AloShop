@@ -46,19 +46,7 @@ Table OF Contents
 11 > SLICK STYLE
 12 > RESPONSIVE
 ------------------------------------*/
-/*=========================================================
-	0 -> EDITION
-===========================================================*/
-.detail{
-	
-	list-style-type: circle;
-	margin-bottom: 10px;
-}
 
-.login{
-	
-	align-items: center;
-}
 /*=========================================================
 	01 -> GENERAL
 ===========================================================*/
@@ -133,9 +121,6 @@ ul, ol {
   border: 1px solid #E4E7ED;
   background-color: #FFF;
   width: 100%;
-  margin-bottom: 10px;
-  display: block;
-  margin: 0,auto;
 }
 
 textarea.input {
@@ -462,7 +447,6 @@ textarea.input {
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #15161D;
-  width:70px;
 }
 
 .header-logo {
