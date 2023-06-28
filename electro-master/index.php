@@ -1,19 +1,6 @@
-<?php session_start();
+<?php 
+session_start();
 
-	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id']))
-	{
-		$_SESSION['cart'] = array(); // initialize the cart
-	
-		$product_id = $_POST['product_id'];
-		if (!in_array($product_id, $_SESSION['cart']))
-		{
-		$_SESSION['cart'][] = $product_id; // add the product to the cart
-		}
-
-		$_SESSION['cart_count'] = count($_SESSION['cart']); // update the cart count
-		echo "<script> alert('success'); </script>";
-		exit(); // stop execution after adding to the cart
-	}
 
 
 ?>
@@ -56,7 +43,8 @@
     </head>
 	<body>
 		<?php
-		
+			
+	   
 		if(isset($_SESSION['login']) && $_SESSION['login']===true)
 		 include('includes/header2.php');
 		 
@@ -107,24 +95,6 @@
 		$conn=new PDO("mysql:host=localhost;dbname=Online_Shop","root","");
 		?>
 		
-
-		<script>
-			document.getElementById("addToCartBtn").addEventListener("click", function(event) {
-			event.preventDefault(); // prevent the form from submitting
-			var form = document.getElementById("addToCartForm");
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "<?php echo $_SERVER['PHP_SELF']; ?>", true);
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function() 
-			{
-				if (xhr.readyState === 4 && xhr.status === 200) 
-				{
-					console.log(xhr.responseText);
-				}
-			};
-			xhr.send(new FormData(form));
-		});
-  </script>
 
 		
 		<!-- SECTION -->
@@ -478,7 +448,7 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<form id="addToCartForm">
+												<form id="addToCartForm" method="POST">
 													<button id="addToCartBtn" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 													<input type="number" name="product_id" hidden value="<?php echo($rowOff['Pro_Code']); ?>">
 												</form>

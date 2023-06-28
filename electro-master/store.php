@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -36,7 +37,15 @@
 
     </head>
 	<body>
-		<?php include('includes/header.html');
+		<?php 
+		if(isset($_SESSION['login']) && $_SESSION['login']===true)
+		 include('includes/header2.php');
+		 
+		else if(isset($_SESSION['admin']) && $_SESSION['admin']===true)
+		include('includes/header3.html');
+		
+		else
+		include('includes/header.html');
 		$Pro=0;
 		
 		
@@ -300,7 +309,10 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<form id="addToCartForm" method="POST">
+											<button id="addToCartBtn" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<input type="number" name="product_id" hidden value="<?php echo($row['Pro_Code']); ?>">
+										</form>
 									</div>
 								</div>
 							</div>

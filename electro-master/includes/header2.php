@@ -1,3 +1,4 @@
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +46,7 @@
 					<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 				</ul>
 				<ul class="header-links pull-right">
-					<li><a href="#"><i class="fa fa-user-o"></i> Logout</a></li>
+					<li><a href="Logout.php"><i class="fa fa-user-o"></i> Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -70,7 +71,7 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
+							<form method="POST" action="store.php">
 								<select class="input-select">
 									<option value="0">All Categories</option>
 									<option value="1">Category 01</option>
@@ -101,7 +102,7 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 									<i class="fa fa-shopping-cart"></i>
 									<span>Your Cart</span>
-									<div class="qty">3</div>
+									<?php include("addToCart.php"); ?><div class="qty"><?php echo($_SESSION['cart_count']); ?></div>
 								</a>
 								<div class="cart-dropdown">
 									<div class="cart-list">

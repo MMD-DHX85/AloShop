@@ -13,6 +13,24 @@
 	});
 
 	/////////////////////////////////////////
+	// Add to cart
+	document.getElementById("addToCartBtn").addEventListener("click", function(event) {
+		event.preventDefault(); // prevent the form from submitting
+		var form = document.getElementById("addToCartForm");
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "addToCart.php", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function() 
+		{
+			if (xhr.readyState === 4 && xhr.status === 200) 
+			{
+				console.log(xhr.responseText);
+			}
+		};
+		xhr.send(new FormData(form));
+		});
+
+	/////////////////////////////////////////
 
 	// Products Slick
 	$('.products-slick').each(function() {
