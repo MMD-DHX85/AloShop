@@ -354,32 +354,32 @@ session_start();
 							<ul class="hot-deal-countdown">
 								<li>
 									<div>
-										<h3>02</h3>
+										<h3 class="days">6</h3>
 										<span>Days</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>10</h3>
+										<h3 class="hours">23</h3>
 										<span>Hours</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>34</h3>
+										<h3 class="mins">59</h3>
 										<span>Mins</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>60</h3>
+										<h3 class="secs">59</h3>
 										<span>Secs</span>
 									</div>
 								</li>
 							</ul>
 							<h2 class="text-uppercase">HOT DEAL THIS WEEK</h2>
 							<p>NEW COLLECTION UP TO 50% OFF</p>
-							<a class="primary-btn cta-btn" href="#">Shop now</a>
+							<a class="primary-btn cta-btn" href="store.php">Shop now</a>
 						</div>
 					</div>
 				</div>

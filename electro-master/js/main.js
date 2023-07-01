@@ -13,6 +13,41 @@
 	});
 
 	/////////////////////////////////////////
+	//  hot deal timer
+	
+	var days = document.querySelector(".days");
+	var hours = document.querySelector(".hours");
+	var mins = document.querySelector(".mins");
+	var secs = document.querySelector(".secs");
+
+	var dcount = 7;
+	var hcount = 24;
+	var mcount = 60;
+	var scount = 60;
+
+	let interval = setInterval(function()
+	{
+	scount--;
+	secs.textContent = scount;
+	if (scount === 0) {
+		scount = 59;
+		console.log(scount)
+		mins.textContent = --mcount;
+	}
+	if (mcount === 0) {
+		mcount = 59;
+		hours.textContent = --hcount;
+	}
+	if (hcount === 0) {
+		hcount = 23;
+		days.textContent = --dcount;
+	}
+	if (dcount === 0) {
+		clearInterval(interval);
+	}
+	}, 1000);
+
+	/////////////////////////////////////////
 	// Add to cart
 	document.getElementById("addToCartBtn").addEventListener("click", function(event) {
 		event.preventDefault(); // prevent the form from submitting
