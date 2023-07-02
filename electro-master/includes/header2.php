@@ -1,30 +1,29 @@
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<title>Electro-Master Shop</title>
 
-	 <!-- Google font -->
-	 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-	 <!-- Bootstrap -->
-	 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
 
-	 <!-- Slick -->
-	 <link type="text/css" rel="stylesheet" href="css/slick.css">
-	 <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="css/slick.css">
+	<link type="text/css" rel="stylesheet" href="css/slick-theme.css">
 
-	 <!-- nouislider -->
-	 <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
 
-	 <!-- Font Awesome Icon -->
-	 <link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 
-	 <!-- Custom stlylesheet -->
-	 <link type="text/css" rel="stylesheet" href="/css/style.css">
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="/css/style.css">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,6 +33,7 @@
 	<![endif]-->
 
 </head>
+
 <body>
 	<!-- HEADER -->
 	<header>
@@ -98,47 +98,90 @@
 							<!-- /Wishlist -->
 
 							<!-- Cart -->
+
+
+
 							<div class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 									<i class="fa fa-shopping-cart"></i>
 									<span>Your Cart</span>
-									<?php include("addToCart.php"); ?><div class="qty"><?php echo($_SESSION['cart_count']); ?></div>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="./img/product01.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
+									<?php include("addToCart.php"); 
+									
+									if (isset($_SESSION['cart'])) {
+										$conn = new PDO("mysql:host=localhost;dbname=Online_Shop", "root", "");
+										$err = $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+										?>
+										<div class="qty">
+											<?php $cnt = $_SESSION['cart_count'];
+											echo ($cnt);
 
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="./img/product02.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a></h3>
-												<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
+											?>
 										</div>
-									</div>
-									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">View Cart</a>
-										<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<?php
+											$Psub = 0;
+
+											for ($i = $cnt - 1; $i >= 0; $i--) {
+												$pro = $_SESSION['cart'][$i];
+
+
+												$stmt = $conn->prepare("SELECT * FROM products WHERE Pro_Code=" . $pro . ";");
+												$stmt->execute();
+												$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+												$Psub = $row['Pro_Price'] + $Psub;
+
+												$img = $conn->prepare("SELECT * FROM image WHERE Pro_Code='" . $pro . "';");
+												$img->execute();
+												$img_row = $img->fetch(PDO::FETCH_ASSOC); ?>
+												<div class="product-widget">
+													<div class="product-img">
+														<img src="<?php echo ($img_row['Path']); ?>" alt="">
+													</div>
+													<div class="product-body">
+														<h3 class="product-name"><a href="product.php?<? echo ($pro); ?>"><?php echo ($row['Pro_Name']); ?></a></h3>
+														<h4 class="product-price"><span class="qty">1x</span>
+															<?php echo ("$" . $row['Pro_Price']); ?>
+														</h4>
+													</div>
+													<button class="delete" onclick="del()"><i class="fa fa-close"></i></button>
+													<!-- <input hidden value="<?php// echo ($i); ?>" id="Vdel">
+
+													<script>
+														function del(){
+															var index = document.getElementById("Vdel").value;
+															 var url = window.location.href;
+															 console.log('yes');
+															 location.href = url + "?Cdel=" + index;
+															 
+														}
+													</script> -->
+
+												</div>
+											<?php } ?>
+										</div>
+										<div class="cart-summary">
+											<small>
+												<?php echo ($_SESSION['cart_count']); ?> Item(s) selected
+											</small>
+											<h5>SUBTOTAL:
+												<?php echo ("$" . $Psub); ?>
+											</h5>
+										</div>
+										<div class="cart-btns">
+											<a href="#">View Cart</a>
+											<a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
 									</div>
 								</div>
-							</div>
+							<?php } ?>
+
+
+
 							<!-- /Cart -->
+
 						</div>
 					</div>
 					<!-- /ACCOUNT -->

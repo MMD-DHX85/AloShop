@@ -768,6 +768,6 @@ session_start();
 		<!-- /SECTION -->
 
 		<?php include("includes/footer.html"); ?>
-
+		<script src="js/main.js"></script>
 	</body>
 </html>
