@@ -82,14 +82,14 @@
 								
 								$img = $conn->prepare("SELECT * FROM image WHERE Pro_Code='" . $row['Pro_Code'] . "';");
 								$img->execute();
-								while ($img_row = $img->fetch(PDO::FETCH_ASSOC))
-								{
+								$img_row = $img->fetch(PDO::FETCH_ASSOC)
+								
 								
 					?>
 					
 							<div class="product-preview">
 								<img src="<?php echo $img_row['Path']; ?>" alt="">
-							</div><?php }} ?>
+							</div><?php } ?>
 						</div>
 					</div>
 					<!-- /Product main img -->
