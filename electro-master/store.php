@@ -45,7 +45,7 @@
 		include('includes/header3.html');
 		
 		else
-		include('includes/header.html');
+		include('includes/header.php');
 		$Pro=0;
 		
 		

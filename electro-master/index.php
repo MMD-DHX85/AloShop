@@ -52,7 +52,7 @@ session_start();
 		include('includes/header3.html');
 		
 		else
-		include('includes/header.html');
+		include('includes/header.php');
 		
 		
 		if(isset($_GET['message']))

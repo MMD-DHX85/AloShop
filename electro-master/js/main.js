@@ -16,7 +16,7 @@
 	//  hot deal timer
 
 	window.onload = function () {
-		if (window.location.href === 'http://localhost/electro-master/Index.php') {
+		if (window.location.href.indexOf('http://localhost/electro-master/Index.php') !== -1) {
 			var days = document.querySelector(".days");
 			var hours = document.querySelector(".hours");
 			var mins = document.querySelector(".mins");
@@ -53,21 +53,21 @@
 
 	/////////////////////////////////////////
 	// Add to cart
-	function cart() {
-		document.getElementById("addToCartBtn").addEventListener("click", function (event) {
-			event.preventDefault(); // prevent the form from submitting
-			var form = document.getElementById("addToCartForm");
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "addToCart.php", true);
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					console.log(xhr.responseText);
-				}
-			};
-			xhr.send(new FormData(form));
-		});
-	}
+	// function cart() {
+	// 	document.getElementById("addToCartBtn").addEventListener("click", function (event) {
+	// 		event.preventDefault(); // prevent the form from submitting
+	// 		var form = document.getElementById("addToCartForm");
+	// 		var xhr = new XMLHttpRequest();
+	// 		xhr.open("POST", "addToCart.php", true);
+	// 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	// 		xhr.onreadystatechange = function () {
+	// 			if (xhr.readyState === 4 && xhr.status === 200) {
+	// 				console.log(xhr.responseText);
+	// 			}
+	// 		};
+	// 		xhr.send(new FormData(form));
+	// 	});
+	// }
 	/////////////////////////////////////////
 
 	// Products Slick

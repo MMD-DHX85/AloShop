@@ -46,7 +46,7 @@
 					<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 				</ul>
 				<ul class="header-links pull-right">
-					<li><a href="Logout.php"><i class="fa fa-user-o"></i> Logout</a></li>
+					<li><a href="Login.php"><i class="fa fa-user-o"></i> Login</a></li>
 				</ul>
 			</div>
 		</div>
@@ -87,19 +87,9 @@
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
-							<!-- Wishlist -->
-							<div>
-								<a href="#">
-									<i class="fa fa-heart-o"></i>
-									<span>Your Wishlist</span>
-									<div class="qty">2</div>
-								</a>
-							</div>
-							<!-- /Wishlist -->
+
 
 							<!-- Cart -->
-
-
 
 							<div class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -123,7 +113,7 @@
 											<?php
 											$Psub = 0;
 
-											for ($i = $cnt-1 ; $i >= 0; $i--) {
+											for ($i = $cnt - 1; $i >= 0; $i--) {
 												$pro = $_SESSION['cart'][$i];
 
 
@@ -147,7 +137,7 @@
 														</h4>
 													</div>
 													<button class="delete"><i class="fa fa-close"></i></button>
-													
+										
 
 												</div>
 											<?php } ?>
@@ -161,8 +151,8 @@
 											</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="cart.php">View Cart</a>
-											<a href="checkout.php">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="#">View Cart</a>
+											<a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>

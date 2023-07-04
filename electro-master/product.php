@@ -42,13 +42,13 @@
 	
 		<?php 
 		if(isset($_SESSION['login']) && $_SESSION['login']===true)
-		 include('includes/header2.html');
+		 include('includes/header2.php');
 		 
 		else if(isset($_SESSION['admin']) && $_SESSION['admin']===true)
 		include('includes/header3.html');
 		
 		else
-		include('includes/header.html');
+		include('includes/header.php');
 		
 		$pro=0;
 		
@@ -118,17 +118,7 @@
 					<!-- /Product thumb imgs -->
 
 					<!-- Product details -->
-					
-					<script>
-						function cart()
-						{
-						var pro=<?php echo $pro; ?>;
-						var qty = document.getElementById("Qty");
-						var Qty = qty.value;
-						location.href="cart.php?pro=" + pro + "&Qty=" + Qty;
-						}
-					</script>
-					
+			
 					<div class="col-md-5">
 						<div class="product-details">
 							<h2 class="product-name"><?php echo $row['Pro_Name']; ?></h2>
@@ -150,7 +140,10 @@
 										<span class="qty-down">-</span>
 									</div>
 								</div>
-								<button class="add-to-cart-btn" onclick="cart()"><i class="fa fa-shopping-cart"></i>add to cart</button>
+								<form id="addToCartForm" method="POST">
+											<button id="addToCartBtn" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											<input type="number" name="product_id" hidden="" value="1000">
+										</form>
 							</div>
 
 							<ul class="product-btns">
