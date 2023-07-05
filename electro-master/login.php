@@ -39,7 +39,7 @@
 											<label for="username">Username</label>
 											<input class="input" type="text" id="username" name="username" required>
 											<label for="password">Password</label>
-											<input class="input" type="password" id="password" name="password" required>
+											<input class="input" type="password" id="password" name="password" required></br></br>
 											<button class="primary-btn order-submit">Login</button></br></br>
 											<label>Don't you have an acount?<a href="sign up.php" style="color:#0077cc;">Sign up</a></label>
 										</form>
