@@ -14,8 +14,7 @@
 
 			   if (!in_array($product_id, $_SESSION['cart']))
 			   {
-				   $_SESSION['cart'][] = $product_id; // add the product to the cart
-                   
+				   $_SESSION['cart'][] = $product_id; // add the product to the cart                   
 			   }
 			   
 			   $_SESSION['cart_count'] = count($_SESSION['cart']); // update the cart count

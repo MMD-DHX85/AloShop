@@ -1,3 +1,5 @@
+<?php session_start(); 
+$cnt = $_SESSION['cart_count'];?>
 <html>
 
 <head>
@@ -20,51 +22,61 @@
                         <div class="col">
                             <h4><b>Shopping Cart</b></h4>
                         </div>
-                        <div class="col align-self-center text-right text-muted" style="padding-left: 10px;">3 items
+                        <div class="col align-self-center text-right text-muted" style="padding-left: 10px;"><?php echo($cnt); ?> item(s)
                         </div>
                     </div>
                 </div>
                 <?php
-                $pro = $_GET['pro'];
-                $qty = $_GET['Qty'];
+                if (isset($_SESSION['cart'])) {
+                    $conn = new PDO("mysql:host=localhost;dbname=Online_Shop", "root", "");
+                    $err = $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $conn = new PDO("mysql:host=localhost;dbname=Online_Shop", "root", "");
-                $err = $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $conn->prepare("SELECT * FROM products WHERE Pro_Code=" . $pro . ";");
-                $stmt->execute();
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    
+                    $Psub = 0;
 
-                $img = $conn->prepare("SELECT * FROM image WHERE Pro_Code='" . $row['Pro_Code'] . "';");
-				$img->execute();
-				$img_row = $img->fetch(PDO::FETCH_ASSOC);
-                
-                    if ($row['Off'] > 0) {
-                        $Off = ($row['Pro_Price'] / 100) * $row['Off'];
-                        $price = $row['Pro_Price'] - $Off;
-                    } else
-                        $price = $row['Pro_Price'];
-                    ?>
-                    <div class="row">
-                        <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="<?php echo $img_row['Path']; ?>"></div>
-                            <div class="col">
-                                <div class="row text-muted">
-                                    <?php echo ($row['Pro_Cat']) ?>
+                    for ($i = $cnt-1; $i >= 0; $i--) {
+                        $pro = $_SESSION['cart'][$i];
+                        $stmt = $conn->prepare("SELECT * FROM products WHERE Pro_Code='$pro';");
+                        $stmt->execute();
+                        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        $Psub = $Psub + $row['Pro_Price'];
+
+                        $img = $conn->prepare("SELECT * FROM image WHERE Pro_Code='" . $row['Pro_Code'] . "';");
+                        $img->execute();
+                        $img_row = $img->fetch(PDO::FETCH_ASSOC);
+
+                        if ($row['Off'] > 0) {
+                            $Off = ($row['Pro_Price'] / 100) * $row['Off'];
+                            $price = $row['Pro_Price'] - $Off;
+                        } else
+                            $price = $row['Pro_Price'];
+                        ?>
+                        <div class="row">
+                            <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" src="<?php echo $img_row['Path']; ?>"></div>
+                                <div class="col">
+                                    <div class="row text-muted">
+                                        <?php echo ($row['Pro_Cat']) ?>
+                                    </div>
+                                    <div class="row">
+                                        <?php echo ($row['Pro_Name']) ?>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <?php echo ($row['Pro_Name']) ?>
+                                <div class="col">
+                                    <a href="#">-</a><a href="#" class="border">
+
+                                    </a><a href="#">+</a>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <a href="#">-</a><a href="#" class="border">
-                                    <?php echo ($qty) ?>
-                                </a><a href="#">+</a>
-                            </div>
-                            <div class="col">
-                                <?php echo ("$" . $row['Pro_Price']) ?><span class="close">✕</span>
+                                <div class="col">
+                                    <?php echo ("$" . $row['Pro_Price']) ?><span class="close">✕</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php }
+                } ?>
+
+
                 <div class="back-to-shop"><a href="store.php">←<span class="text-muted">Back to shop</span></a></div>
             </div>
             <div class="col-md-4 summary">
@@ -73,22 +85,20 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col">3 ITEMS</div>
-                    <div class="col text-right">€ 132.00</div>
+                    <div class="col"><?php echo($cnt); ?> item(s)</div>
+                    <div class="col text-right"><?php echo("$" . $Psub); ?></div>
                 </div>
                 <form>
                     <p>SHIPPING</p>
                     <select>
-                        <option class="text-muted">Standard-Delivery- €5.00</option>
+                        <option class="text-muted">Standard-Delivery- FREE</option>
                     </select>
-                    <p>GIVE CODE</p>
-                    <input id="code" placeholder="Enter your code">
                 </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">TOTAL PRICE</div>
-                    <div class="col text-right">€ 137.00</div>
+                    <div class="col text-right"><?php echo("$" . $Psub); ?></div>
                 </div>
-                <button class="primary-btn order-submit">CHECKOUT</button>
+                <a href="checkout.php" class="primary-btn order-submit">CHECKOUT</a>
             </div>
         </div>
 
@@ -101,7 +111,7 @@
                 e.preventDefault();
             });
         });
-    </script>
+    </>
 
 </body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
 

@@ -17,6 +17,8 @@
 			if($row['Type']==2)
 			{	$_SESSION['FName']=$row['First_Name'];
 				$_SESSION['login']=true;
+				$_SESSION['Username']=$Username;
+				$_SESSION['Password']=$Password;
 				header("Location: Index.php?message=login_success");
 				exit();
 			}

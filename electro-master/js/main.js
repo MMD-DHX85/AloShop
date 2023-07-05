@@ -11,6 +11,10 @@
 	$('.cart-dropdown').on('click', function (e) {
 		e.stopPropagation();
 	});
+	//////////////////////////////////////////
+	//submit checkout form
+
+	
 
 	/////////////////////////////////////////
 	//  hot deal timer

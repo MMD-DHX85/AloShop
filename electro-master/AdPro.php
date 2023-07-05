@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -38,15 +39,14 @@
 	<body>
 				<?php
 		
-		if(isset($_SESSION['login']) && $_SESSION['login']===true)
-		 include('includes/header2.php');
-		 
-		else if(isset($_SESSION['admin']) && $_SESSION['admin']===true)
-		include('includes/header3.html');
 		
+		if(isset($_SESSION['admin']) && $_SESSION['admin']==true)
+		include('includes/header3.html');
+
 		else
-		include('includes/header.php');
-				?>
+		echo"<script>alert('no');</script>";
+		
+			?>
 				
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
@@ -61,10 +61,11 @@
 							<div class="section-title">
 								<h3 class="title">New Product</h3>
 									</div>
-											<form action="action_NewPro.php" method="POST" enctype="multipart/form-data">
-												
+											<form action="action_NewPro.php" method="POST">
+												<div class="asideput"><label for="ProCode">Product Code</label>
+												<input placeholder="1000" class="input" type="text" id="ProCode" name="ProCode" required>
 												<label for="ProName">Product Name</label>
-												<input placeholder="ProArt" class="input" type="text" id="ProName" name="ProName" required>
+												<input placeholder="ProArt" class="input" type="text" id="ProName" name="ProName" required></div>
 												<label for="ProBrand">Product Brand</label>
 												<input placeholder="Asus" class="input" type="text" id="ProBrand" name="ProBrand" required>
 												<label for="ProCat">Product Category</label>
@@ -87,9 +88,9 @@
 												</div>
 												
 												<label for="ProPic">Product Picture</label>
-												<input type="file" name="ProPic[]" multiple>
+												<input type="file" name="ProPic">
 
-												<button type="submit" class="primary-btn order-submit">Product Register</button></br></br>
+												<button class="primary-btn order-submit">Product Register</button></br></br>
 												
 										</form>
 									</div>
