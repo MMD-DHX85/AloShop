@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 02, 2023 at 08:22 AM
+-- Generation Time: Jul 05, 2023 at 11:58 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `online_shop`
 --
+CREATE DATABASE IF NOT EXISTS `online_shop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_persian_ci;
+USE `online_shop`;
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`First_Name`, `Last_Name`, `Username`, `Password`, `Type`, `Email`) VALUES
 ('Mohamad', 'Hatami', 'mohamad844', '0640971180', 1, 'mohammad8448145@gmail.com'),
-('بب', 'بب', 'ببب', 'ببب', 2, 'testtest@gmail.com');
+('Mohamad', 'Hatami', 'mohammad844', '0640971180', 2, '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
